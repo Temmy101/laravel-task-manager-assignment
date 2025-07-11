@@ -17,3 +17,4 @@ Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.crea
 Route::post('/tasks/store', [TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
 
+Route::patch('/tasks/{task}/complete', [TaskController::class, 'markComplete'])->name('tasks.complete');

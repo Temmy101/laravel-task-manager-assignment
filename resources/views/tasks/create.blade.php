@@ -29,6 +29,30 @@
             @enderror
         </div><br>
 
+        <div>
+            <label for="sheduled_date">Scheduled Date:</label>
+            <input type="date" name="scheduled_date" id="scheduled_date" value="{{ old('scheduled_date') }}">
+            @error('scheduled_date')
+                <div>{{ $message }}</div>
+            @enderror
+        </div><br>
+
+        <div>
+             <label for="start_time">Start Date:</label>
+            <input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}">
+            @error('start_time')
+                <div>{{ $message }}</div>
+            @enderror
+        </div><vr><br>
+
+        <div>
+             <label for="reminder_time">Reminder Date:</label>
+            <input type="time" name="reminder_time" id="reminder_time" value="{{ old('reminder_time') }}">
+            @error('reminder_time')
+                <div>{{ $message }}</div>
+            @enderror
+        </div><br>
+
 
 
         <button type="submit">Create Task</button>

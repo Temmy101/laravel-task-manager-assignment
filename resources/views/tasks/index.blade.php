@@ -9,6 +9,15 @@
 <body>
     <h1>Tasks</h1>
     <ul>
+
+
+        @if (session('success'))
+            <div style="color: green;">
+                {{ session('success') }}
+            </div>
+
+        @endif
+        
         @foreach ($tasks as $task)
             <li>
                 <a href="/tasks/{{ $task['id'] }}">
@@ -18,17 +27,21 @@
 
 
                 <p>{{ $task->description }}</p>
-                <p>Status: {{ $task->is_completed ? 'Completed' : 'Not Completed' }}</p>
+                <p>Status: {{ $task->is_completed ? "Complete" : "Incomplete" }}</p>
+
+              @if (!$task->is_completed)
+                <form action="{{ route('tasks.complete', $task) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit">Mark Complete</button>
+                </form>
+
+             @endif
+
             </li>
 
         @endforeach
 
-        @if (session('success'))
-            <div style="color: green;">
-                {{ session('success') }}
-            </div>
-
-        @endif
     </ul>
 </body>
 </html>

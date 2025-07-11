@@ -29,14 +29,32 @@ class TaskController extends Controller
         $validateData = $request->validate([
             'title' => 'required|min:3|max:255|unique:tasks',
             'description' => 'nullable|max:500',
+            'scheduled_date' => 'nullable|date',
+
+
         ]);
+
+
 
         $task = new Task();
         $task->title = $validateData['title'];
         $task->description = $validateData['description'];
         $task->is_completed = false;
+        $task->scheduled_date = $validateData['scheduled_date'];
+
         $task->save();
+
+       # Task::create(array_merge($validateData, ['is_completed' => false]));
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
     }
+
+        public function markComplete(Task $task)
+        {
+            $task->is_completed = true;
+            $task->save();
+
+            return redirect()->route('tasks.index')->with('success', 'Task marked complete!');
+
+        }
 }
