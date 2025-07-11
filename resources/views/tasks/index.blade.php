@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Tasks</h1>
-    <ul>
+    <ul> 
 
 
         @if (session('success'))
@@ -17,7 +17,7 @@
             </div>
 
         @endif
-        
+
         @foreach ($tasks as $task)
             <li>
                 <a href="/tasks/{{ $task['id'] }}">
