@@ -18,4 +18,25 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         return view('tasks.show', compact('task'));
     }
+
+    public function create()
+    {
+        return view('tasks.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validateData = $request->validate([
+            'title' => 'required|min:3|max:255|unique:tasks',
+            'description' => 'nullable|max:500',
+        ]);
+
+        $task = new Task();
+        $task->title = $validateData['title'];
+        $task->description = $validateData['description'];
+        $task->is_completed = false;
+        $task->save();
+
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
+    }
 }
